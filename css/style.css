@@ -1,0 +1,16 @@
+*{
+    font-family: 'Arial', 'sans-serif', Arial, sans-serif;
+}
+
+.navbar{
+    background: rgb(62, 172, 135);
+    font-size: 20px;
+}
+.navbar-nav{
+    color: blanchedalmond !important;
+}
+
+.text-titulo-1{
+    font-size: 18px;
+    
+}
