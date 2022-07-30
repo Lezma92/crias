@@ -1,5 +1,3 @@
-
-
 <?php
 
     $pagina =  isset($_GET["pagina"]) ? strtolower($_GET["pagina"]) : "index";
