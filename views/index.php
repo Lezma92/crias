@@ -1,7 +1,3 @@
-<?php
-include("controller/consultas_crias.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +31,7 @@ include("controller/consultas_crias.php");
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">No. Registro</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Costo</th>
                             <th scope="col">Peso</th>
@@ -42,28 +39,9 @@ include("controller/consultas_crias.php");
                             <th scope="col">Aciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        $registros = new consultasCrias();
-                        $resp = $registros->llenarTablaCrias();
-                        if ($resp != "SinDatos") {
-                            foreach ($resp as $key => $value) {
-                        ?>
-                                <tr>
-                                    <th scope="row"><?php echo ($key + 1) ?></th>
-                                    <td scope="row"><?php echo ($value["nombre"]) ?></td>
-                                    <td scope="row"><?php echo ("$" . $value["costo"]) ?></td>
-                                    <td scope="row"><?php echo ($value["peso"] . " K") ?></td>
-                                    <td scope="row"><?php echo ($value["descripcion"]) ?></td>
-                                    <td scope="row">
-                                        <div class="btn-group">
-                                            <button type="buttom" class="btn btn-sm btn-primary">Informacion</button>
-                                            <button type="buttom" class="btn btn-sm btn-warning">Eliminar</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                        <?php }
-                        } ?>
+                    <tbody id="cuerpoTabla">
+                        
+                
                     </tbody>
                 </table>
             </div>
@@ -79,13 +57,5 @@ include("controller/consultas_crias.php");
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/script_crias.js"></script>
-
-
-
-<script>
-    $(document).ready(function() {
-        $('#tablaCrias').DataTable();
-    });
-</script>
 
 </html>
