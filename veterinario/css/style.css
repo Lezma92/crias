@@ -1,0 +1,22 @@
+* {
+    font-family: 'Arial', 'sans-serif', Arial, sans-serif;
+
+}
+
+body {
+    background: rgb(231, 231, 231);
+}
+
+.navbar {
+    background: rgb(228, 253, 2);
+    font-size: 20px;
+}
+
+.navbar-nav {
+    color: rgb(56, 35, 2);
+}
+
+.text-titulo-1 {
+    font-size: 18px;
+
+}

@@ -20,9 +20,8 @@
     <div class="container-fluid">
         <div class="card mt-4">
             <div class="card-header text-center">
-                <h4>Bienvenido</h4>
-                <h5>Veterinario</h5>
-                <p>En esta sección se muestran todos los registros que se han realizado recientemente</p>
+                <h5>Bienvenido</h5>
+                <h6>Veterinario</h6>
                 </dv>
             </div>
             <div class="card-body">
@@ -30,26 +29,28 @@
                     <div class="card-body">
                         <div class="alert alert-info" role="alert">
                             <div class="pad table-responsive">
-                                <table class="table table-hover" id="tablaStsSalud">
+                                <table class="table table-hover" id="tablaCuarentena">
                                     <thead class="">
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">No. Registro</th>
-                                            <th scope="col">Temperatura °C</th>
-                                            <th scope="col">Fr. Cardiaca</th>
-                                            <th scope="col">Fr. Respiratoria</th>
-                                            <th scope="col">Fr. Sanguinea</th>
-                                            <th scope="col">Status Salud</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Marmoleo</th>
+                                            <th scope="col">Color de Musculo</th>
+                                            <th scope="col">Peso</th>
                                             <th scope="col">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpoTabla">
-
-
+                                        
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="card-footer text-muted text-center">
+                        <p id="ult_revision">Sin datos</p>
                     </div>
                 </div>
 
@@ -63,6 +64,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/script_veterinario.js"></script>
+<script src="js/script_cuarentena.js"></script>
+
 
 </html>

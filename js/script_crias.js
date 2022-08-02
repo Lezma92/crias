@@ -7,6 +7,7 @@ tabla = "";
 document.addEventListener("DOMContentLoaded", () => {
     const ventana = document.getElementById("de");
     const boton_enviar = document.getElementById("btn_guardar");
+    const boton_actualizar = document.getElementById("btn_actualizar");
     getFolio();
     if (ventana.value == "modal") {
         llenarTabla();
@@ -65,12 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                     `<td class="row">${descripcion}</td>`,
                                     `<td class="row">
                                         <div class="btn-group">
-                                            <button type="buttom" class="btn btn-sm btn-primary">Editar</button>
-                                            <button type="buttom" class="btn btn-sm btn-warning">Eliminar</button>
+                                            <button type="buttom" onclick ="getDatosUpdate('${txt_folio}');" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#updateCrias">Editar</button>
                                         </div>
                                     </td>`
                                 ]).draw();
-
                             }
                             num_row += 1;
                             $('#addCrias').modal('hide');
@@ -89,6 +88,61 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+    });
+
+    boton_actualizar.addEventListener("click", (evt) => {
+        evt.preventDefault();
+        const upd_folio = document.getElementById("upd_folio").value;
+        const upd_nombre = document.getElementById("upd_nombre").value;
+        const upd_marmoleo = document.getElementById("upd_marmoleo").value;
+        const upd_colorMusculo = document.getElementById("upd_musculo").value;
+        const upd_peso = document.getElementById("upd_peso").value;
+        const upd_costo = document.getElementById("upd_costo").value;
+        const upd_descripcion = document.getElementById("upd_descripcion").value;
+
+        if (upd_nombre != "" && upd_peso != "" && upd_costo != "" && upd_descripcion != "" && upd_marmoleo != "" && upd_colorMusculo != "") {
+            if (upd_peso > 10 && upd_costo > 10) {
+                let datos = new FormData();
+
+                datos.append("Actualizar", "Actualizar");
+                datos.append("id_proveedor", 1);
+                datos.append("txt_folio", upd_folio);
+                datos.append("nombre", upd_nombre);
+                datos.append("marmoleo", upd_marmoleo);
+                datos.append("colorMusculo", upd_colorMusculo);
+                datos.append("peso", upd_peso);
+                datos.append("costo", upd_costo);
+                datos.append("descripcion", upd_descripcion);
+
+                $.ajax({
+                    url: "controller/ajax_crias.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: function (respuesta) {
+                        console.log(respuesta);
+                        if (respuesta == "ok") {
+                            document.getElementById("formUpdateCria").reset();
+                            alerta("Datos actualizados correctamente!");
+                            getFolio();
+                            $('#updateCrias').modal('hide');
+                            setTimeout("location.reload(true);", "3000");
+                        } else {
+
+                        }
+                    }
+                });
+            } else {
+                msg_alert.classList.remove("d-none");
+                msg_alert.innerText = "el peso y el costo deben de ser mayor a 10";
+            }
+        } else {
+            msg_alert.classList.remove("d-none");
+            msg_alert.innerText = "Por favor complete todos los campos";
+        }
     });
 
 
@@ -170,8 +224,7 @@ function llenarTabla() {
                                 <td scope="cell">${element["descripcion"]}</td>
                                 <td scope="cell">
                                     <div class="btn-group">
-                                        <button type="buttom" class="btn btn-sm btn-primary">Editar</button>
-                                        <button type="buttom" class="btn btn-sm btn-warning">Eliminar</button>
+                                        <button type="buttom" onclick ="getDatosUpdate('${element["NoRegistro"]}');" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#updateCrias">Editar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -186,6 +239,34 @@ function llenarTabla() {
         }
     });
 }
+
+function getDatosUpdate(id) {
+    console.log(id);
+    let datos = new FormData();
+    datos.append("buscarDatos", id);
+    $.ajax({
+        url: "controller/ajax_crias.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (respuesta) {
+            document.getElementById("upd_folio").value = respuesta["NoRegistro"];
+            document.getElementById("upd_nombre").value = respuesta["nombre"];
+            document.getElementById("upd_marmoleo").value = respuesta["marmoleo"];
+            document.getElementById("upd_musculo").value = respuesta["colorMusculo"];
+            document.getElementById("upd_peso").value = respuesta["peso"];
+            document.getElementById("upd_costo").value = respuesta["costo"];
+            document.getElementById("upd_descripcion").value = respuesta["descripcion"];
+            document.getElementById("idCrias").value = id;
+
+        }
+    });
+}
+
+
 
 
 

@@ -15,6 +15,7 @@ class controladorAyudante
 
         $datos = array(
             "id_crias" => $_POST["id_c"],
+            "status_revision" =>"status_revision",
             "tempertura" => $_POST["val_txt_temp"],
             "frecuencia_c" => $_POST["val_txt_fcardiaca"],
             "frecuencia_r" => $_POST["val_txt_frespiratoria"],
@@ -23,6 +24,7 @@ class controladorAyudante
 
         $fun_add->setDatosRegistrar($datos);
         $respuesta = $fun_add->addRevisiones();
+        
         echo (json_encode($respuesta));
     }
 }

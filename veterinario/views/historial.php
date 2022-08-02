@@ -1,3 +1,12 @@
+<?php
+$numero = $_GET["registro"];
+if (isset($numero)) {
+} else {
+    header("location: ?pagina=principal");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,8 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
     <link rel="stylesheet" href="css/style.css">
-
-    <title>Veterinario</title>
+    <title>Historial</title>
 </head>
 
 <body>
@@ -21,16 +29,16 @@
         <div class="card mt-4">
             <div class="card-header text-center">
                 <h4>Bienvenido</h4>
-                <h5>Veterinario</h5>
-                <p>En esta sección se muestran todos los registros que se han realizado recientemente</p>
+                <h5>Historial de todas las revisiones que se le han realizado a <?php echo ($numero); ?></h5>
                 </dv>
             </div>
             <div class="card-body">
+                <input type="hidden" name="numero_registro" id="numero_registro" value="<?php echo ($numero); ?>">
                 <div class="card">
                     <div class="card-body">
                         <div class="alert alert-info" role="alert">
                             <div class="pad table-responsive">
-                                <table class="table table-hover" id="tablaStsSalud">
+                                <table class="table table-hover" id="tablaHistorial">
                                     <thead class="">
                                         <tr>
                                             <th scope="col">#</th>
@@ -40,7 +48,8 @@
                                             <th scope="col">Fr. Respiratoria</th>
                                             <th scope="col">Fr. Sanguinea</th>
                                             <th scope="col">Status Salud</th>
-                                            <th scope="col">Acción</th>
+                                            <th scope="col">Status revisión</th>
+                                            <th scope="col">Fecha Revisión</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpoTabla">
@@ -63,6 +72,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/script_veterinario.js"></script>
+<script src="js/script_historial.js"></script>
+
 
 </html>

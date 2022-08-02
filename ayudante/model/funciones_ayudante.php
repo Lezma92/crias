@@ -14,18 +14,20 @@ class funcionesAyudante extends ConexionBD
     {
         $this->datos_registrar = array(
             "id_crias" => $datos["id_crias"],
+            "status_revision" => $datos["status_revision"],
             "tempertura" => $datos["tempertura"],
             "frecuencia_c" => $datos["frecuencia_c"],
             "frecuencia_r" => $datos["frecuencia_r"],
             "frecuencia_s" => $datos["frecuencia_s"],
         );
     }
-    function getDatosRegistrar(){
+    function getDatosRegistrar()
+    {
         return $this->datos_registrar;
     }
     function addRevisiones()
     {
-        $query = $this->getConexion()->prepare("INSERT INTO datosSensores  VALUES (NULL,:id_crias,:tempertura,:frecuencia_c,:frecuencia_r,:frecuencia_s,current_timestamp())");
+        $query = $this->getConexion()->prepare("INSERT INTO datosSensores  VALUES (NULL,:id_crias,:tempertura,:frecuencia_c,:frecuencia_r,:frecuencia_s,current_timestamp(),'enviado')");
         $query->bindParam(":id_crias", $this->datos_registrar["id_crias"], PDO::PARAM_INT);
         $query->bindParam(":tempertura", $this->datos_registrar["tempertura"], PDO::PARAM_STR);
         $query->bindParam(":frecuencia_c", $this->datos_registrar["frecuencia_c"], PDO::PARAM_INT);
@@ -34,7 +36,19 @@ class funcionesAyudante extends ConexionBD
 
         if ($query->execute()) {
             return "ok";
-        }else{
+        } else {
+            return $query->errorInfo();
+        }
+    }
+    function updateStatusSaludCrias()
+    {
+        $query = $this->getConexion()->prepare("UPDATE crias SET status_revision = :status_revision WHERE id =:id");
+        $query->bindParam(":status_revision", $this->datos_registrar["status_revision"], PDO::PARAM_STR);
+        $query->bindParam(":id", $this->datos_registrar["id_crias"], PDO::PARAM_INT);
+
+        if ($query->execute()) {
+            return "ok";
+        } else {
             return $query->errorInfo();
         }
     }

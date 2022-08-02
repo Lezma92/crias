@@ -8,4 +8,9 @@ class consultasCrias
         $resp = $respuesta->getDatosBDCrias();
         return $resp;
     }
+    function mostrarTodo(){
+        $respuesta = new operacionesCrias();
+        $resp = $respuesta->getAllDatosBDCrias();
+        return $resp;
+    }
 }

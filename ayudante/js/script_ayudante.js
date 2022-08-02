@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             processData: false,
             dataType: "json",
             success: function (respuesta) {
+                console.log(respuesta);
                 if (respuesta == "ok") {
                     document.getElementById("formulario_revision").reset();
                     $("#addRevision").modal("hide");
@@ -105,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     btn_agregarRevision.classList.remove("d-none");
 
-
                     respuesta.forEach(element => {
                         if (n == 0) {
                             titulo.innerHTML = `<h4><strong class="text-primary">No. Registro:</strong> ${element["NoRegistro"]}</h4>`;
@@ -113,8 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             txt_idCrias.value = element["id"];
                             txt_folio.value = `${element["NoRegistro"]}`;
                             txt_nombre.value = `${element["nombre"]}`;
-
-
                             etq_nombre.innerText = `${element["nombre"]}`;
                             etq_marmoleo.innerText = `${element["marmoleo"]}`;
                             etq_musculo.innerText = `${element["colorMusculo"]}`;
